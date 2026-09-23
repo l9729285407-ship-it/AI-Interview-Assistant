@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Interview Preparation Assistant</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #131a30;
+      --border: #26304f;
+      --text: #e8ecf8;
+      --muted: #9aa6c4;
+      --accent: #6ea8fe;
+      --accent2: #7ee0a3;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #1b2a55 0%, var(--bg) 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      line-height: 1.6;
+    }
+    .card {
+      max-width: 760px;
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.45);
+    }
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid var(--border);
+      background: rgba(126,224,163,.08);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.2; margin-bottom: 14px; }
+    p.lead { color: var(--muted); font-size: 16px; margin-bottom: 26px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: .92; }
+    .btn-primary { background: var(--accent); color: #08101f; }
+    .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 26px; }
+    .feature {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .feature strong { display: block; color: var(--text); margin-bottom: 4px; font-size: 14px; }
+    .note {
+      font-size: 13.5px;
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      padding: 8px 0 8px 14px;
+      background: rgba(110,168,254,.06);
+      border-radius: 0 8px 8px 0;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <span class="pill">Machine Learning &middot; NLP &middot; Streamlit</span>
+    <h1>AI Interview Preparation Assistant</h1>
+    <p class="lead">
+      A Streamlit web app that analyzes your resume, serves categorized interview
+      questions, and scores your written answers using TF-IDF vectorization,
+      cosine similarity and rule-based keyword matching &mdash; with a performance
+      dashboard and weak-topic recommendations stored in SQLite.
+    </p>
+
+    <div class="actions">
+      <a class="btn btn-primary"
+         href="https://share.streamlit.io/l9729285407-ship-it/AI-Interview-Assistant/main/app.py"
+         target="_blank" rel="noopener">Open the Live App &rarr;</a>
+      <a class="btn btn-secondary"
+         href="https://github.com/l9729285407-ship-it/AI-Interview-Assistant"
+         target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+    <div class="grid">
+      <div class="feature"><strong>Resume Analysis</strong>PDF skill extraction with PyPDF2 and rule-based matching.</div>
+      <div class="feature"><strong>Answer Scoring</strong>70% TF-IDF / cosine similarity + 30% keyword match.</div>
+      <div class="feature"><strong>Performance Dashboard</strong>Plotly charts, history log and weak-topic detection.</div>
+    </div>
+
+    <p class="note">
+      The interactive app runs on <strong>Streamlit Community Cloud</strong>, which
+      supports Streamlit. This Vercel deployment serves as the project landing page.
+      See <code>README.md &rarr; Deployment</code> for instructions.
+    </p>
+  </main>
+</body>
+</html>

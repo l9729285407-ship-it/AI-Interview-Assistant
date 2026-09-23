@@ -105,6 +105,11 @@ AI-Interview-Assistant/
 ├── app.py                       # Main Streamlit application (all pages)
 ├── requirements.txt
 ├── README.md
+├── .gitignore                   # Keeps venv/, __pycache__/, *.db out of git
+├── vercel.json                  # Vercel config (static landing page build)
+├── .vercelignore                # Keeps venv/ etc. out of the Vercel upload
+├── public/
+│   └── index.html               # Vercel landing page (links to live app + repo)
 ├── database/
 │   └── database.py              # SQLite schema + CRUD operations
 ├── data/
@@ -190,3 +195,49 @@ This project demonstrates a complete, working application of NLP and Machine Lea
 techniques — text preprocessing, TF-IDF vectorization, and cosine similarity — to solve
 a genuine, practical problem for engineering students: objective, automated feedback on
 interview answer quality, combined with performance tracking to guide focused revision.
+
+---
+
+## 17. Deployment
+
+### Option A — Streamlit Community Cloud (recommended, free, runs the real app)
+
+1. Push the project to GitHub:
+   ```bash
+   git add -A
+   git commit -m "Update project"
+   git push origin main
+   ```
+2. Go to https://share.streamlit.io/ and sign in with your GitHub account.
+3. Click **Create app → Deploy an existing app**.
+4. Fill in:
+   | Field | Value |
+   |---|---|
+   | Repository | `l9729285407-ship-it/AI-Interview-Assistant` |
+   | Branch | `main` |
+   | Main file path | `app.py` |
+5. Click **Deploy**. Your app will be live at `https://<app-name>.streamlit.app`.
+
+**Cloud notes:**
+- The SQLite database (`data/interview_assistant.db`) lives on the ephemeral
+  container, so history resets on redeploy/restart. For permanent storage, move to
+  PostgreSQL (see Future Scope).
+- The first run downloads the NLTK datasets (punkt, stopwords, wordnet).
+
+### Option B — Vercel (project landing page)
+
+Vercel's serverless Python runtime only supports WSGI/ASGI frameworks such as Flask and
+FastAPI. Streamlit needs a long-running WebSocket server plus persistent disk, so it
+**cannot run inside Vercel functions** (an earlier config pointing `@vercel/python` at
+`app.py` would fail the build, since `app.py` exports no WSGI application).
+
+`vercel.json` is therefore set up as a **static build** that serves `public/index.html`
+— a landing page linking to the live Streamlit app and this repository:
+
+1. Go to https://vercel.com → **Add New… → Project**.
+2. Import `l9729285407-ship-it/AI-Interview-Assistant` from GitHub.
+3. Keep the default settings (no framework preset is required) → **Deploy**.
+4. Your landing page goes live at `https://<project>.vercel.app`.
+
+> Tip: edit `public/index.html` and replace the "Open the Live App" URL with your actual
+> Streamlit Cloud address after Option A finishes deploying.
